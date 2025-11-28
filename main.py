@@ -6,6 +6,7 @@ import requests
 import os
 from validation import Validation
 from contextlib import asynccontextmanager
+from fastapi.responses import PlainTextResponse
 
 FILE_ID = ""
 MODEL_PATH = "modelo.pkl"
@@ -55,7 +56,7 @@ async def lifespan(app: FastAPI):
 
     print("Modelo listo.")
 
-from fastapi.responses import PlainTextResponse
+app = FastAPI(lifespan=lifespan)
 
 @app.get("/info", response_class=PlainTextResponse)
 async def info():
@@ -123,6 +124,3 @@ async def root(
         "precio_usd": valor_en_usd,
         "precio_cop": valor_en_usd * 3800
     }
-    
-
-app = FastAPI(lifespan=lifespan)
