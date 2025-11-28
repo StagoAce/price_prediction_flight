@@ -56,6 +56,9 @@ async def lifespan(app: FastAPI):
 
     print("Modelo listo.")
 
+    yield
+
+
 app = FastAPI(lifespan=lifespan)
 
 @app.get("/info", response_class=PlainTextResponse)
