@@ -7,8 +7,7 @@ import os
 from validation import Validation
 from contextlib import asynccontextmanager
 
-app = FastAPI()
-
+FILE_ID = ""
 MODEL_PATH = "modelo.pkl"
 
 def download_from_drive(file_id: str, destination: str):
@@ -124,3 +123,6 @@ async def root(
         "precio_usd": valor_en_usd,
         "precio_cop": valor_en_usd * 3800
     }
+    
+
+app = FastAPI(lifespan=lifespan)
