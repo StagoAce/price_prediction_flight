@@ -9,7 +9,6 @@ from contextlib import asynccontextmanager
 
 app = FastAPI()
 
-FILE_ID = "1L8p2V6DLzIYRoWhos6momcSWKQ9Vg753"
 MODEL_PATH = "modelo.pkl"
 
 def download_from_drive(file_id: str, destination: str):
@@ -44,6 +43,8 @@ def download_from_drive(file_id: str, destination: str):
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     global modelo
+    
+    FILE_ID = os.getenv("FILE_ID")
 
     if not os.path.exists(MODEL_PATH):
         print("Descargando modelo desde Google Drive...")
